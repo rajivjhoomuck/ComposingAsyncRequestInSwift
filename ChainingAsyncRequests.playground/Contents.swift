@@ -11,8 +11,12 @@ PlaygroundPage.current.needsIndefiniteExecution = true
 
 /*:
  ## Use the `|>` operator to compose requests.
+
+ - Note:
+ **Each request (open API.swift from the Sources directory) has a `shouldFail` toggle. You can set it to `true` and test the result for `validation` and `bankUsing`.**
  */
-    
+
+
 /*:
  ### A simple validation
  - Experiment: **Validating a user for purchase**
@@ -55,9 +59,3 @@ let bankUsing = fetchCustomer |> updateCreditCard |> fetchBank
     }
 */
 // <#Type the above code here to see the request#>
-
-/*:
- - Note:
- **Each request (open API.swift from the Sources directory) has a `shouldFail` toggle. You can set it to `true` and test the result for `validation` and `bankUsing`.**
- */
-
