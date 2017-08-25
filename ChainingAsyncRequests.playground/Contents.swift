@@ -36,7 +36,12 @@ let validation = fetchCustomer |> updateAddress |> updateCreditCard
     }
 */
 // <#Type the above code here to see the request#>
-
+validation("12345") {
+    switch $0 {
+    case .success(let customer): print(customer)
+    case .failure(let error): print(error.localizedDescription)
+    }
+}
 
 /*:
  ### Grab the bank from a customer identifier
