@@ -21,7 +21,21 @@ PlaygroundPage.current.needsIndefiniteExecution = true
  ### A simple validation
  - Experiment: **Validating a user for purchase**
  */
-let validation = fetchCustomer |> updateAddress |> updateCreditCard
+func foo(customer: Customer) { print("🔥Customer naam update: " + (customer.name ?? "Unnamed!")) }
+
+let update: Request<Customer, Result<Customer>> = { customer, customerCompletion in
+    foo(customer: customer);
+    customerCompletion(.success(customer))
+}
+
+let startIdentity: Request<String, Result<String>> =  { $1(.success($0)) }
+
+let validation = startIdentity
+    |> fetchCustomer
+    |> { print("🆔"); $1(.success($0)) }
+    |> (update)
+    |> updateAddress
+    |> updateCreditCard
 
 /*:
  * Callout(Using the `validation` function):
@@ -37,8 +51,9 @@ let validation = fetchCustomer |> updateAddress |> updateCreditCard
 */
 // <#Type the above code here to see the request#>
 validation("12345") {
+    print("\n\nAfter validation: 👹")
     switch $0 {
-    case .success(let customer): print(customer)
+    case .success(let customer): print(customer.canMakeOnlinePurchase)
     case .failure(let error): print(error.localizedDescription)
     }
 }

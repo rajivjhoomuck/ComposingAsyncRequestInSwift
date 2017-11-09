@@ -7,7 +7,7 @@ public func |> <T, U, V> (f: @escaping Request<T, Result<U>>, g: @escaping Reque
         
         f(input) { (u: Result<U>) in
             switch u {
-            case .success(let unwrappedU): g(unwrappedU) { (v: Result<V>) in combineCompletion(v) }
+            case .success(let unwrappedU): g(unwrappedU, combineCompletion)
             case .failure(let error): combineCompletion(.failure(error))
             }
         }

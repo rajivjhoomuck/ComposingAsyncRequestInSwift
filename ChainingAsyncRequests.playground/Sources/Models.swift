@@ -9,7 +9,7 @@ public struct Customer {
     public var canMakeOnlinePurchase: Bool {
         guard
             let name = self.name,
-            name.characters.count > 0,
+            name.count > 0,
             let _ = self.billingAddress,
             let _ = self.creditCard
             else { return false }
